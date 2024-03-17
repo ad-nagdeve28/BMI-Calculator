@@ -1,6 +1,8 @@
 import 'package:bmi/widgets/circularprogressindicator.dart';
+import 'package:bmi/widgets/themecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,7 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Height = MediaQuery.of(context).size.height;
     final Width = MediaQuery.of(context).size.width;
+    final darkModeProvider = Provider.of<ThemeManager>(context);
     return Scaffold(
+      backgroundColor: darkModeProvider.darkMode ? Colors.black : Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
         elevation: 0.0,
@@ -42,7 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    color: Colors.white,
+                    // color: Colors.white,
+
+                    color:
+                        darkModeProvider.darkMode ? Colors.black : Colors.white,
                     child: Container(
                         height: MediaQuery.of(context).size.height,
                         width: Width / 2.5,
@@ -82,10 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                         width: Width,
                         padding: const EdgeInsets.all(8.0),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(30))),
+                        decoration: BoxDecoration(
+                            color: darkModeProvider.darkMode
+                                ? Colors.black
+                                : Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                // topLeft: Radius.circular(Width * 0.5)
+                                topLeft: Radius.circular(60))),
                         child: Lottie.asset('assets/homepage/boy.json')),
                   ),
                 ],
